@@ -6,10 +6,11 @@
 #include "engine/WindowManager.h"
 #include "engine/DisplayManager.h"
 #include "engine/ResourceManager.h"
-#include "engine/AnimationHandler.h"
 #include "engine/TimeManager.h"
 #include "engine/ViewManager.h"
 #include "mainmenu/MainMenu.h"
+#include "cube/Leaderboard.h"
+#include "Settings.h"
 #include "3D/Game.h"
 
 int main(int argc, char* argv[]) {
@@ -26,9 +27,13 @@ int main(int argc, char* argv[]) {
     ViewManager viewManager = ViewManager();
 
     MainMenu mainMenu = MainMenu(&resources, display.getSize());
+    Leaderboard leaderboard = Leaderboard(resources.ttf, display.getSize());
+    Settings settings = Settings(display.getSize());    
     Game game = Game(display.getSize(), &window, &resources);
     
     viewManager.addView("mainmenu", &mainMenu);
+    viewManager.addView("leaderboard", &leaderboard);
+    viewManager.addView("settings", &settings);    
     viewManager.addView("game", &game);
     viewManager.setCurrentView("mainmenu");
 
