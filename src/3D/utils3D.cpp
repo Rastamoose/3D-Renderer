@@ -21,6 +21,10 @@ Vec3 Vec3::operator-(const Vec3& b) const{
     return Vec3(x-b.x,y-b.y,z-b.z);
 }
 
+Vec3 Vec3::operator-() const{
+    return Vec3(-x,-y,-z);
+}
+
 Vec3 Vec3::operator*(float scalar) const{
     return Vec3(x*scalar,y*scalar,z*scalar);
 }

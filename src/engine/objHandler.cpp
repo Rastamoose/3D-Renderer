@@ -27,11 +27,16 @@ void Obj::updateOutVecs(){
     }
 }
 
-OBJHandler::OBJHandler(){}
+OBJHandler::OBJHandler(){
+    std::cout << "<OBJHANDLER> OBJ initialised.\n";
+    
+}
 
 OBJHandler::~OBJHandler(){
-    for(auto& model:models){
-        delete model.second;
+    if(models.size()>0){
+        for(auto& model:models){
+            delete model.second;
+        }
     }
     std::cout << "<OBJHANDLER> Models successfully destroyed.\n";
 }
@@ -42,7 +47,6 @@ void OBJHandler::triangulate(std::vector<int>& face, const std::string& name){
         getModel(name)->faces.push_back(tri);
     }
 }
-
 
 int OBJHandler::loadModel(const std::string& name, const char* fName){
     std::ifstream file(fName);
@@ -102,6 +106,7 @@ inline Obj* OBJHandler::getModel(const std::string& name){
 }                    
 
 void OBJHandler::getAllModels(std::vector<Obj*>& objs){
+    if(models.size()==0){return;}
     // reserve capacity to avoid unecessary resizing
     objs.reserve(models.size());
     

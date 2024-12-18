@@ -11,7 +11,8 @@ struct Vec3{
     Vec3(float px, float py, float pz);
     Vec3 operator=(const Vec3& b);
     Vec3 operator+(const Vec3& b) const;
-    Vec3 operator-(const Vec3& b) const;
+    Vec3 operator-(const Vec3& b) const;    // subtraction
+    Vec3 operator-() const;                 // negation
     Vec3 operator*(float scalar) const;
     float dot(const Vec3& b);  
     float mag();  

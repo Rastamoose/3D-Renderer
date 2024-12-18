@@ -12,8 +12,9 @@ ResourceManager::ResourceManager(SDL_Renderer* prenderer):
     renderer(prenderer), img(nullptr), ttf(nullptr), obj(nullptr){}
 
 ResourceManager::~ResourceManager(){
-    delete img;
+    delete obj;
     delete ttf;
+    delete img;
 }
 
 void ResourceManager::initIMG(){

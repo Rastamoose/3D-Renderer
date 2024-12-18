@@ -5,7 +5,7 @@
 #define PI 3.14159f
 #define ZNEAR 0.1f
 #define ZFAR 1000.0f
-#define FOV 140
+#define FOV 90
 
 #include <cmath>
 #include <vector>
@@ -17,11 +17,13 @@
 // Conversions cause points to lose accuracy over time and thus become smaller (use -Wconversion flag to check)
 
 struct Camera{
-    Vec3 pos = {5,0, -10};
+    Vec3 pos = {0,0,-10};
     Vec3 target = {0,0,0};
     Vec3 up = {0,1,0};
 
     Camera();
+    void move(float x, float y, float z){pos.x+=x;pos.y+=y;pos.z+=z;target.x-=x;target.y-=y;target.z-=z;}
+    void moveTo(float x, float y, float z){pos.x=x;pos.y=y;pos.z=z;target.x=-x;target.y=-y;target.z=-z;}
 };
 
 class Engine3D{
@@ -44,8 +46,9 @@ class Engine3D{
     void perspectiveDiv(Vec4& vec);
     // scale from NDC coordinate [-1,1] to the actual 2d screen
     void viewportTransform(const Point& sSize, Vec4& vec);
-    // draw connections on an object
     void rasterise(DisplayManager* display, const Obj* obj);
+    // fill pixels within each triangle
+    void fillTriangle(DisplayManager* display, const Point& a, const Point& b, const Point& c);
 
     public:
     Engine3D(WindowManager* pwindow, OBJHandler* pobjHandler);
